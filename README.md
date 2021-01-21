@@ -1,2 +1,2 @@
-# ami-repository-template
+# centos7-base-ami
 

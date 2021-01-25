@@ -1,10 +1,12 @@
 variable "ami_name_prefix" {
   type        = string
+  default     = "centos7-base"
   description = "The prefix string that will be used for the name tags of the resulting AMI and snapshot(s); the version string will be appended automatically"
 }
 
 variable "ansible_host_alias" {
   type        = string
+  default     = "centos7-base"
   description = "The Ansible host alias"
 }
 
@@ -22,7 +24,7 @@ variable "aws_region" {
 
 variable "aws_source_ami_filter_name" {
   type        = string
-  default     = "CentOS 8* x86_64*"
+  default     = "CentOS 7* x86_64*"
   description = "The source AMI filter string. Any filter described by the DescribeImages API documentation is valid. If multiple images match then the latest will be used"
 }
 
@@ -64,4 +66,16 @@ variable "ssh_username" {
 variable "version" {
   type        = string
   description = "The semantic version number for the AMI; the version string will be appended automatically to the name tags added to the resulting AMI and snapshot(s)"
+}
+
+variable "encrypt_boot" {
+  type        = bool
+  default     = false
+  description = "Whether to encrypt the root volume of the AMI (and instances created from it)"
+}
+
+variable "kms_key_id" {
+  type        = string
+  default     = null
+  description = "KMS key ID, arn or alias to use for root volume encryption in the main region. If encrypt_boot is true and this is left null, the AWS default key is used"
 }

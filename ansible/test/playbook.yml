@@ -1,0 +1,35 @@
+---
+- name: Bring up docker containers
+  hosts: localhost
+  gather_facts: false
+  vars:
+    inventory:
+      - name: centos7-base
+        image: "geerlingguy/docker-centos7-ansible"
+  roles:
+    - role: provision_docker
+      provision_docker_inventory: "{{ inventory }}"
+      provision_docker_privileged: True
+
+- name: Setup docker pre-reqs
+  hosts: centos7-base
+  become: true
+  tasks:
+    - name: Install openssh
+      package:
+        name: openssh-server
+        state: present
+
+- import_playbook: ../playbook.yml
+  vars: 
+    #Disable some tasks that don't work in Docker test
+    rhel7cis_rule_1_1_14: false
+    rhel7cis_rule_1_5_2: false
+    rhel7cis_rule_1_6_1_1: false
+    rhel7cis_rule_1_6_1_2: false
+    rhel7cis_rule_1_6_1_3: false
+    rhel7cis_rule_1_6_1_4: false
+    rhel7cis_rule_1_6_1_5: false
+    rhel7cis_rule_1_6_1: false
+    rhel7cis_rule_5_2: false
+    selinux_ports: false

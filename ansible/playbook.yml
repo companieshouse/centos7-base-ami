@@ -4,45 +4,38 @@
   collections: 
     - ch-collections.base
   pre_tasks:
-  - name: Updating System Packages Before Ansible Run
-    yum:
-      name: '*'
-      state: latest
+    - name: Updating System Packages Before Ansible Run
+      yum:
+        name: '*'
+        state: latest
+    - name: Add 127.0.0.1 to allow hosts
+      lineinfile:
+        path: /etc/hosts.allow
+        line: "ALL: 127.0.0.1"
   roles:
-    - role: RHEL7-CIS
-      vars:
-        rhel7cis_time_synchronization: chrony
-        rhel7cis_time_synchronization_servers: ["169.254.169.123"] #Default VPC source
-        rhel7cis_squid_server: true
-        rhel7cis_firewall: "iptables"
-        #Disable rsyslog/syslog-ng, using cloudwatch
-        rhel7cis_rule_4_2_3: false
-        rhel7cis_rule_4_2_1_1: false
-        rhel7cis_rule_4_2_1_2: false
-        rhel7cis_rule_4_2_1_3: false
-        rhel7cis_rule_4_2_1_4: false
-        rhel7cis_rule_4_2_1_5: false
-        rhel7cis_rule_4_2_2_1: false
-        rhel7cis_rule_4_2_2_2: false
-        rhel7cis_rule_4_2_2_3: false
-        rhel7cis_rule_4_2_2_4: false
-        rhel7cis_rule_4_2_2_5: false
-        rhel7cis_rule_4_3: false
-        #Disable GRUB tasks
-        rhel7cis_rule_1_4_2: false
-        rhel7cis_rule_1_6_1_1: false
-        rhel7cis_rule_4_1_3: false
-        #Disable Firewall Tasks, we manage this in app deploy
-        rhel7cis_rule_3_6_1: false
-        rhel7cis_rule_3_6_2: false
-        rhel7cis_rule_3_6_3: false
-        rhel7cis_rule_3_6_4: false
-        rhel7cis_rule_3_6_5: false
-        rhel7cis_rule_5_4_4: false
     - epel
-    - role: cloudwatch-agent
-      vars:
-        cwa_conf_json_file_content: "{{ lookup('file', 'files/cloudwatch-config.json') }}"
+    - ch_collections.base.os_package_control
+    - RHEL7-CIS
+    - cloudwatch-agent
     - ch_collections.base.cloudwatch_agent_helper
     - ch_collections.base.nagios_nrpe_client
-    - clamav
+    - ch_collections.base.clamav
+    - ch_collections.base.nagios_nrpe_client
+  tasks: 
+    - name: update iscsi config setting
+      lineinfile: 
+        path: /etc/iscsi/iscsid.conf
+        regexp: '^node.session.timeo.replacement_timeout = 120' 
+        line: 'node.session.timeo.replacement_timeout = 5'
+        backrefs: yes
+    - name: Run multipath config tool to enable multipath and disable user friendly names
+      command: mpathconf --enable --with_multipathd y --user_friendly_names n
+      args:
+        creates: /etc/multipath.conf
+    - name: update mpath config to disable friendly names
+      lineinfile: 
+        path: /etc/multipath.conf
+        insertafter: '^defaults*'
+        line: 'user_friendly_names no'
+
+        

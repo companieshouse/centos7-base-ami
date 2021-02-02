@@ -19,7 +19,7 @@
     - cloudwatch-agent
     - ch_collections.base.cloudwatch_agent_helper
     - ch_collections.base.nagios_nrpe_client
-    - ch_collections.base.clamav
+    - clamav
     - ch_collections.base.nagios_nrpe_client
   tasks: 
     - name: update iscsi config setting

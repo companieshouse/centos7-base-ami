@@ -14,6 +14,7 @@
         line: "ALL: 127.0.0.1"
   roles:
     - epel
+    - pip
     - ch_collections.base.os_package_control
     - RHEL7-CIS
     - cloudwatch-agent

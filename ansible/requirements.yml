@@ -13,10 +13,7 @@ roles:
   - src: geerlingguy.clamav
     name: clamav
   
-  - src: geerlingguy.pip
-    name: pip
-
 collections:
   - name: https://github.com/companieshouse/ansible-collections.git#ch_collections/base
-    version: 0.1.12
+    version: 0.1.16
     type: git

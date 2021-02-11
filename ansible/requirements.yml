@@ -15,5 +15,5 @@ roles:
 
 collections:
   - name: https://github.com/companieshouse/ansible-collections.git#ch_collections/base
-    version: 0.1.5
+    version: 0.1.12
     type: git

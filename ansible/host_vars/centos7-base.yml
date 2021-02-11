@@ -5,7 +5,12 @@ additional_packages:
   - iscsi-initiator-utils
   - device-mapper-multipath
   - sg3_utils
-  - ansible
+
+additional_packages_pip:
+  - name: ansible
+  - name: j2cli
+    umask: "0022"
+
 ## CloudWatch Agent Variables
 cwa_conf_json_file_content: "{{ lookup('file', 'files/cloudwatch-config.json') }}"
 

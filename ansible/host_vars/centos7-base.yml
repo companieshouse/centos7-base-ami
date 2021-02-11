@@ -6,11 +6,14 @@ additional_packages:
   - device-mapper-multipath
   - sg3_utils
 
-additional_packages_pip:
+pip_install_packages:
+  - name: pip
+    state: latest
   - name: ansible
   - name: j2cli
     umask: "0022"
 
+    
 ## CloudWatch Agent Variables
 cwa_conf_json_file_content: "{{ lookup('file', 'files/cloudwatch-config.json') }}"
 

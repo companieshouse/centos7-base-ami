@@ -5,7 +5,7 @@ additional_packages:
   - iscsi-initiator-utils
   - device-mapper-multipath
   - sg3_utils
-  - https://s3.eu-west-2.amazonaws.com/amazon-ssm-eu-west-2/latest/linux_amd64/amazon-ssm-agent.rpm
+  - https://s3.{{ region| default("eu-west-2") }}.amazonaws.com/amazon-ssm-{{ region| default("eu-west-2") }}/latest/linux_amd64/amazon-ssm-agent.rpm
 
 pip_install_packages:
   - name: pip

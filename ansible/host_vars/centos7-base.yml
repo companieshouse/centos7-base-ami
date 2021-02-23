@@ -47,6 +47,12 @@ rhel7cis_rule_3_6_3: false
 rhel7cis_rule_3_6_4: false
 rhel7cis_rule_3_6_5: false
 rhel7cis_rule_5_4_4: false
+# Setup hosts.allow entries
+rhel7cis_host_allow:
+  - "127.0.0.1"
+  - "10.0.0.0/255.0.0.0"
+  - "172.16.0.0/255.240.0.0"
+  - "192.168.0.0/255.255.0.0"
 
 ## Nagios Variables
 nrpe_allowed_hosts:

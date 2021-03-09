@@ -12,6 +12,7 @@ pip_install_packages:
   - name: pip
     state: latest
   - name: ansible
+    version: "2.10.6"
   - name: j2cli
     umask: "0022"
 

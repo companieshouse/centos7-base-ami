@@ -20,6 +20,7 @@
 - import_playbook: ../playbook.yml
   vars: 
     #Disable some tasks that don't work in Docker test
+    rhel7cis_rule_1_1_2: false
     rhel7cis_rule_1_1_14: false
     rhel7cis_rule_1_5_2: false
     rhel7cis_rule_1_6_1_1: false
@@ -30,3 +31,5 @@
     rhel7cis_rule_1_6_1: false
     rhel7cis_rule_5_2: false
     selinux_ports: false
+    clamav_daemon_state: stopped
+    clamav_freshclam_daemon_state: stopped

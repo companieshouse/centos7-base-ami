@@ -10,5 +10,5 @@ ansible-galaxy install -r ../requirements.yml
 
 Then we can execute the playbook. This will create a docker container based on Centos7 and execute the playbook.
 ```
-ansible-playbook playbook.yml
+ansible-playbook playbook.yml --extra-vars @../host_vars/centos7-base.yml --skip-tags rule_4.3
 ```

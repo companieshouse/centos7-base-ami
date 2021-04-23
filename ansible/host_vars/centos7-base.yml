@@ -7,6 +7,8 @@ additional_packages:
   - sg3_utils
   - git
   - https://s3.{{ region| default("eu-west-2") }}.amazonaws.com/amazon-ssm-{{ region| default("eu-west-2") }}/latest/linux_amd64/amazon-ssm-agent.rpm
+  - libselinux-python
+  - libsemanage-python
   - screen
 
 pip_install_packages:
@@ -17,7 +19,10 @@ pip_install_packages:
   - name: j2cli
     umask: "0022"
 
-    
+selinux_policies:
+  - antivirus_can_scan_system
+  - nagios_run_sudo
+
 ## CloudWatch Agent Variables
 cwa_conf_json_file_content: "{{ lookup('file', 'files/cloudwatch-config.json') }}"
 
@@ -58,20 +63,15 @@ rhel7cis_host_allow:
   - "192.168.0.0/255.255.0.0"
 
 ## Nagios Variables
+nagios_host: nagios.sharedservices.aws.internal
 nrpe_allowed_hosts:
   - "127.0.0.1"
   - "10.44.12.0/24"
   - "10.44.13.0/24"	
   - "10.44.14.0/24"
-nrpe_plugin_packages:
-  - nagios-plugins-nrpe
-  - nagios-plugins
-  - nagios-plugins-disk
 nrpe_command:
   check_disk_all:
     script: check_disk
     option: -w 80 -c 90
 nrpe_config: 
-  dont_blame_nrpe: 0
-
-
+  dont_blame_nrpe: 1

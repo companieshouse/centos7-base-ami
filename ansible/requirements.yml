@@ -6,7 +6,7 @@ roles:
 
   - src: https://github.com/MindPointGroup/RHEL7-CIS.git
     name: RHEL7-CIS
-    version: "main"
+    version: "ce603b0e676fedbf6e79ae89187c87b7a98a2c23"
 
   - src: https://github.com/christiangda/ansible-role-amazon-cloudwatch-agent.git
     name: cloudwatch-agent

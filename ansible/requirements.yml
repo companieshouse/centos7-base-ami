@@ -16,7 +16,7 @@ roles:
   
 collections:
   - name: https://github.com/companieshouse/ansible-collections.git#ch_collections/base
-    version: 0.1.38
+    version: 0.1.39
     type: git
 
   - name: ansible.posix

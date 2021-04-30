@@ -62,7 +62,7 @@ rhel7cis_host_allow:
   - "172.16.0.0/255.240.0.0"
   - "192.168.0.0/255.255.0.0"
 
-## Nagios Variables
+## Nagios agent variables
 nagios_host: nagios.sharedservices.aws.internal
 nrpe_allowed_hosts:
   - "127.0.0.1"

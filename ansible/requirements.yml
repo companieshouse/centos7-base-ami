@@ -1,7 +1,7 @@
 ---
 collections:
   - name: https://github.com/companieshouse/ansible-collections.git#ch_collections/base
-    version: 0.1.42
+    version: 0.1.74
     type: git
   - name: ansible.posix
     version: 1.1.1
@@ -15,6 +15,4 @@ roles:
     version: "ce603b0e676fedbf6e79ae89187c87b7a98a2c23"
   - src: https://github.com/christiangda/ansible-role-amazon-cloudwatch-agent.git
     name: cloudwatch-agent
-  - src: geerlingguy.clamav
-    name: clamav
   

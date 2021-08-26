@@ -15,11 +15,12 @@
     - epel
     - ch_collections.base.pip
     - ch_collections.base.os_package_control
-    - RHEL7-CIS
+    - ch_collections.base.clamav
     - cloudwatch-agent
     - ch_collections.base.cloudwatch_agent_helper
+    - RHEL7-CIS
     - ch_collections.base.nagios_nrpe_client
-    - ch_collections.base.clamav
+
   tasks: 
     - name: update iscsi config setting
       lineinfile: 

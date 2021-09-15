@@ -9,6 +9,7 @@ additional_packages:
   - https://s3.{{ region| default("eu-west-2") }}.amazonaws.com/amazon-ssm-{{ region| default("eu-west-2") }}/latest/linux_amd64/amazon-ssm-agent.rpm
   - libselinux-python
   - libsemanage-python
+  - policycoreutils-python
   - screen
   - logrotate
 
@@ -58,6 +59,7 @@ rhel7cis_rule_3_6_3: false
 rhel7cis_rule_3_6_4: false
 rhel7cis_rule_3_6_5: false
 rhel7cis_rule_5_4_4: false
+rhel7cis_rule_5_4_5: false
 # Setup hosts.allow entries
 rhel7cis_host_allow:
   - "127.0.0.1"

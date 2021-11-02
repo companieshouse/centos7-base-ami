@@ -27,7 +27,7 @@
         line: 'node.session.timeo.replacement_timeout = 5'
         backrefs: yes
     - name: Run multipath config tool to enable multipath and disable user friendly names
-      command: mpathconf --enable --with_multipathd y --user_friendly_names n
+      command: mpathconf --enable --with_multipathd y --with_chkconfig y --user_friendly_names n
       args:
         creates: /etc/multipath.conf
     - name: Make sure aws ssm agent is enabled

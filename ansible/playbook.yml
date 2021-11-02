@@ -1,8 +1,6 @@
 ---
 - hosts: centos7-base
   become: true
-  collections: 
-    - ch-collections.base
   pre_tasks:
     - name: Updating System Packages Before Ansible Run
       yum:
@@ -32,11 +30,6 @@
       command: mpathconf --enable --with_multipathd y --user_friendly_names n
       args:
         creates: /etc/multipath.conf
-    - name: update mpath config to disable friendly names
-      lineinfile: 
-        path: /etc/multipath.conf
-        insertafter: '^defaults*'
-        line: 'user_friendly_names no'
     - name: Make sure aws ssm agent is enabled
       service:
         name: amazon-ssm-agent

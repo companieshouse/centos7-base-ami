@@ -12,6 +12,7 @@ additional_packages:
   - policycoreutils-python
   - screen
   - logrotate
+  - chrony
 
 pip_install_packages:
   - name: pip

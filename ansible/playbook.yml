@@ -47,7 +47,7 @@
         enabled: yes
     - name: Restrict Kernel log access
       block:
-        - name: Copy hardening file
+        - name: Copy kernel hardening file
           ansible.builtin.copy:
             src: 10-kernel-hardening.conf
             dest: /etc/sysctl.d/10-kernel-hardening.conf

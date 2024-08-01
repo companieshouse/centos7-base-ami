@@ -7,6 +7,7 @@
         path: /etc/yum.repos.d/CentOS-Base.repo
         state: absent
         regexp: '^mirrorlist'
+    
     - name: Change default repo
       ansible.builtin.replace:
         path: /etc/yum.repos.d/CentOS-Base.repo
@@ -24,10 +25,15 @@
         
         - line: '#baseurl=http://mirror.centos.org/centos/$releasever/centosplus/$basearch/'
           regexp: 'baseurl=https://vault.centos.org/$releasever/centosplus/$basearch/'
+    
+    - name: Run yum clean before attempting update
+      command: yum clean expire-cache
+
     - name: Updating System Packages Before Ansible Run
       yum:
         name: '*'
         state: latest
+    
     - name: Set timezone to Europe/London
       community.general.timezone:
         name: Europe/London

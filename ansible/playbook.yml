@@ -10,8 +10,8 @@
       loop:
         - line: 'mirrorlist='
           regexp: '#mirrorlist='
-        - line: '#baseurl='
-          regexp: 'baseurl='
+        - line: '#baseurl=http://mirror.centos.org/centos/$releasever/os/$basearch/'
+          regexp: 'baseurl=https://vault.centos.org/7.9.2009/os/$basearch/'
     - name: Updating System Packages Before Ansible Run
       yum:
         name: '*'

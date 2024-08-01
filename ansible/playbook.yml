@@ -11,7 +11,7 @@
         - line: 'mirrorlist='
           regexp: '#mirrorlist='
         - line: '#baseurl='
-          regexp: 'baseurl'
+          regexp: 'baseurl='
     - name: Updating System Packages Before Ansible Run
       yum:
         name: '*'

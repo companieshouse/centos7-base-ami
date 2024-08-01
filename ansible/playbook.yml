@@ -8,10 +8,10 @@
         replace: "{{ item.line }}"
         regexp: "{{ item.regexp }}"
       loop:
-        - line: '^mirrorlist'
-          regexp: '#mirrorlist'
-        - line: '^#baseurl'
-          regexp: '^baseurl'
+        - line: 'mirrorlist='
+          regexp: '#mirrorlist='
+        - line: '#baseurl='
+          regexp: 'baseurl='
     - name: Updating System Packages Before Ansible Run
       yum:
         name: '*'

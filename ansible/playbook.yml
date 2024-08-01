@@ -2,16 +2,28 @@
 - hosts: centos7-base
   become: true
   pre_tasks:
+    - name: Remove mirrorlist entries in CentOS-Base.repo
+      ansible.builtin.lineinfile:
+        path: /etc/yum.repos.d/CentOS-Base.repo
+        state: absent
+        regexp: '^mirrorlist'
     - name: Change default repo
       ansible.builtin.replace:
         path: /etc/yum.repos.d/CentOS-Base.repo
         replace: "{{ item.line }}"
         regexp: "{{ item.regexp }}"
       loop:
-        - line: 'mirrorlist='
-          regexp: '#mirrorlist='
         - line: '#baseurl=http://mirror.centos.org/centos/$releasever/os/$basearch/'
           regexp: 'baseurl=https://vault.centos.org/7.9.2009/os/$basearch/'
+
+        - line: '#baseurl=http://mirror.centos.org/centos/$releasever/updates/$basearch/'
+          regexp: 'baseurl=https://vault.centos.org/7.9.2009/updates/$basearch/'
+        
+        - line: '#baseurl=http://mirror.centos.org/centos/$releasever/extras/$basearch/'
+          regexp: 'baseurl=https://vault.centos.org/7.9.2009/extras/$basearch/'
+        
+        - line: '#baseurl=http://mirror.centos.org/centos/$releasever/centosplus/$basearch/'
+          regexp: 'baseurl=https://vault.centos.org/7.9.2009/centosplus/$basearch/'
     - name: Updating System Packages Before Ansible Run
       yum:
         name: '*'

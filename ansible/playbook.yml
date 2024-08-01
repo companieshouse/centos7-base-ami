@@ -1,9 +1,17 @@
 ---
 - hosts: centos7-base
   become: true
-  collections:
-    - ch-collections.security_banner
   pre_tasks:
+    - name: Change default repo
+      ansible.builtin.replace:
+        path: /etc/yum.repos.d/CentOS-Base.repo
+        line: "{{ item.line }}"
+        regexp: "{{ item.regexp }}"
+      loop:
+        - line: '^mirrorlist'
+          regexp: '#mirrorlist'
+        - line: '^#baseurl'
+          regexp: '^baseurl'
     - name: Updating System Packages Before Ansible Run
       yum:
         name: '*'

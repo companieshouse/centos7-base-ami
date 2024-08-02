@@ -15,16 +15,16 @@
         regexp: "{{ item.regexp }}"
       loop:
         - line: '#baseurl=http://mirror.centos.org/centos/$releasever/os/$basearch/'
-          regexp: 'baseurl=https://vault.centos.org/$releasever/os/$basearch/'
+          regexp: 'baseurl=https://vault.centos.org/7.9.2009/os/$basearch/'
 
         - line: '#baseurl=http://mirror.centos.org/centos/$releasever/updates/$basearch/'
-          regexp: 'baseurl=https://vault.centos.org/$releasever/updates/$basearch/'
+          regexp: 'baseurl=https://vault.centos.org/7.9.2009/updates/$basearch/'
         
         - line: '#baseurl=http://mirror.centos.org/centos/$releasever/extras/$basearch/'
-          regexp: 'baseurl=https://vault.centos.org/$releasever/extras/$basearch/'
+          regexp: 'baseurl=https://vault.centos.org/7.9.2009/extras/$basearch/'
         
         - line: '#baseurl=http://mirror.centos.org/centos/$releasever/centosplus/$basearch/'
-          regexp: 'baseurl=https://vault.centos.org/$releasever/centosplus/$basearch/'
+          regexp: 'baseurl=https://vault.centos.org/7.9.2009/centosplus/$basearch/'
     
     - name: Run yum clean before attempting update
       command: yum clean expire-cache

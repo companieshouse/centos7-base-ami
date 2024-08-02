@@ -27,7 +27,7 @@
           regexp: 'baseurl=https://vault.centos.org/7.9.2009/centosplus/$basearch/'
     
     - name: Run yum clean before attempting update
-      command: yum clean expire-cache
+      command: yum clean all
 
     - name: Updating System Packages Before Ansible Run
       yum:

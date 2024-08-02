@@ -2,6 +2,16 @@
 - hosts: centos7-base
   become: true
   pre_tasks:
+    
+    - name: Create swap file
+      ansible.builtin.command: dd if=/dev/zero of=/swapfile bs=1M count=2048
+    - name: Set swap file permissions
+      ansible.builtin.command: chmod 600 /swapfile
+    - name: Define swap file
+      ansible.builtin.command: mkswap /swapfile
+    - name: Turn swap on
+      ansible.builtin.command: swapon /swapfile
+    
     - name: Remove mirrorlist entries in CentOS-Base.repo
       ansible.builtin.lineinfile:
         path: /etc/yum.repos.d/CentOS-Base.repo

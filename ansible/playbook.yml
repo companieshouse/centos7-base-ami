@@ -2,39 +2,11 @@
 - hosts: centos7-base
   become: true
   pre_tasks:
-    
-    - name: Create swap file
-      ansible.builtin.command: dd if=/dev/zero of=/swapfile bs=1M count=2048
-    - name: Set swap file permissions
-      ansible.builtin.command: chmod 600 /swapfile
-    - name: Define swap file
-      ansible.builtin.command: mkswap /swapfile
-    - name: Turn swap on
-      ansible.builtin.command: swapon /swapfile
-    
     - name: Remove mirrorlist entries in CentOS-Base.repo
-      ansible.builtin.lineinfile:
-        path: /etc/yum.repos.d/CentOS-Base.repo
-        state: absent
-        regexp: '^mirrorlist'
+      ansible.builtin.shell: sed -i -e '/mirrorlist/d' /etc/yum.repos.d/CentOS-Base.repo
     
     - name: Change default repo
-      ansible.builtin.replace:
-        path: /etc/yum.repos.d/CentOS-Base.repo
-        replace: "{{ item.line }}"
-        regexp: "{{ item.regexp }}"
-      loop:
-        - line: '#baseurl=http://mirror.centos.org/centos/$releasever/os/$basearch/'
-          regexp: 'baseurl=https://vault.centos.org/7.9.2009/os/$basearch/'
-
-        - line: '#baseurl=http://mirror.centos.org/centos/$releasever/updates/$basearch/'
-          regexp: 'baseurl=https://vault.centos.org/7.9.2009/updates/$basearch/'
-        
-        - line: '#baseurl=http://mirror.centos.org/centos/$releasever/extras/$basearch/'
-          regexp: 'baseurl=https://vault.centos.org/7.9.2009/extras/$basearch/'
-        
-        - line: '#baseurl=http://mirror.centos.org/centos/$releasever/centosplus/$basearch/'
-          regexp: 'baseurl=https://vault.centos.org/7.9.2009/centosplus/$basearch/'
+      ansible.builtin.shell:  sed -i -e 's|#baseurl=http://mirror.centos.org/centos/$releasever|baseurl=https://vault.centos.org/7.9.2009|g' CentOS-Base.repo
     
     - name: Run yum clean before attempting update
       command: yum clean all

@@ -8,11 +8,11 @@
     - name: Change base repo address
       ansible.builtin.shell:  sed -i -e 's|#baseurl=http://mirror.centos.org/centos/$releasever|baseurl=https://vault.centos.org/7.9.2009|g' /etc/yum.repos.d/CentOS-Base.repo
 
-    - name: Remove metalink entries in CentOS-Base.repo
-      ansible.builtin.shell: sed -i -e 's/metalink/#metalink/g' /etc/yum.repos.d/epel.repo
+    # - name: Remove metalink entries in CentOS-epel.repo
+    #   ansible.builtin.shell: sed -i -e 's/metalink/#metalink/g' /etc/yum.repos.d/epel.repo
 
-    - name: Change epel repo address
-      ansible.builtin.shell: sed -i -e 's|baseurl=http://download.fedoraproject.org/pub/epel/|baseurl=https://archives.fedoraproject.org/pub/archive/epel/|g' /etc/yum.repos.d/epel.repo
+    # - name: Change epel repo address
+    #   ansible.builtin.shell: sed -i -e 's|baseurl=http://download.fedoraproject.org/pub/epel/|baseurl=https://archives.fedoraproject.org/pub/archive/epel/|g' /etc/yum.repos.d/epel.repo
     
     - name: Run yum clean before attempting update
       command: yum clean all
